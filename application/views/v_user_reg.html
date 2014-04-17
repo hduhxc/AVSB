@@ -1,0 +1,84 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>新用户注册</title>
+<script src="../../script/jquery-2.0.3.min.js"></script>
+<script src="../../semantic/packaged/javascript/semantic.min.js"></script>
+<script src="../../script/validation_rule.js"></script> 
+<link href="../../semantic/packaged/css/semantic.min.css" rel="stylesheet" type="text/css">
+<style>
+#main {
+	margin-left: auto;
+	margin-right: auto;
+}
+</style>
+<script>
+$(document).ready(function(){
+	$('.ui.form').form(rules,
+		{ 
+			inline : true, 
+			on : 'blur',
+			onSuccess : function() {
+				var formData = $('form').serialize();
+				$.post('/index.php/c_user/user_reg',formData,processData);
+				function processData(data) {
+					$('#error').html('<div class="header">'+data+'</div>');
+					$('#error').show();
+					if (data == '恭喜您,注册成功!') {
+						$('#submit').hide();
+						setTimeout(function(){
+							window.location.reload();
+						},3000);
+					}
+				}
+			}
+		});
+	$('#main').css('width',$(document).width() * 0.6);
+	$('#error').hide();
+});
+</script>
+</head>
+<body>
+<div class="ui menu">
+	<a class="item" href="/index.php">
+    	<i class="home icon"></i>首页
+    </a>
+	<div class="right menu">
+		<a class="active item">
+			<i class="user icon"></i>注册
+		</a>
+	</div>
+</div>
+<div id="main">
+<div id='error' class="ui small info message" ></div>
+<div class="ui attached message">
+	<div class="header"> 新用户注册 </div>
+</div>
+<div class="ui attached form segment">
+<form>
+  <div class="field">
+  	<label>用户名</label>
+    <input name="user_name" type="text" />
+  </div>
+  <div class="field">
+  	<label>密码</label>
+    <input name="user_pwd" type="password" />
+  </div>
+  <div class="field">
+  	<label>确认密码</label>
+    <input name="user_confirmpwd" type="password" />
+  </div>
+  <div class="field">
+  	<label>Email</label>
+    <input name="user_mail" type="text" />
+  </div>
+  <div class="field">
+  	<label>个人简介(选填)</label>
+    <textarea name="user_profile"></textarea>
+  </div>
+  <div id="submit" class="ui blue submit button">注册</div>
+</form>
+</div>
+</div>
+</body>
+</html>
