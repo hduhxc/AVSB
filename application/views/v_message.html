@@ -1,0 +1,89 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>首页</title>
+<link href="../../../resource/colorbox.css" rel="stylesheet" type="text/css">
+<link href="../../../semantic/packaged/css/semantic.min.css" rel="stylesheet" type="text/css">
+<script src="../../../script/jquery-2.0.3.min.js"></script>
+<script src="../../../script/jquery.colorbox-min.js"></script>
+<script src="../../../script/homepage.js"></script>
+</head>
+<body>
+<div id="menu" class="ui menu">
+	<a class ="active item" href="/index.php">
+		<i class = "home icon"></i> 首页
+	</a>
+	<a id = "publish" class ="item" href="/index.php/c_message/message_publish">
+		<i class = "edit icon"></i> 发布新信息
+	</a>
+	<div class="right menu">
+		<a class="item" href="/index.php/c_user/user_reg">
+			<i class="user icon"></i>注册
+		</a>
+		<a class="item" id="login_button">
+			<i class="sign in icon"></i><span></span>
+		</a>
+	</div>
+</div>
+<div class="ui icon huge message">
+	<i class="chat icon"></i>
+	<div class="content">
+		<div class="header">欢迎使用AVSB v0.01 Alpha 1</div>
+		<ul class="list">
+			<li>AVSB, A Very Simple BBS! </li>
+			<li>提供最基本的公告发布功能</li>
+		</ul>
+	</div>
+</div> 
+<table class="ui celled table segment">
+  <thead><tr>
+    <th>ID</th>
+    <th>活动标题</th>
+    <th>活动类型</th>
+    <th>发布人</th>
+    <th></th>
+  </tr></thead>
+  {message}
+  <tbody>
+  <tr>
+  	<td>{message_id}</td>
+  	<td>{message_title}</td>
+  	<td>{message_kind}</td>
+  	<td>{message_issuer}</td>
+    <td><div class="ui tiny basic button iframe" href="{message_link}">
+  		<i class="icon search"></i>查看详情
+ 		</div>
+	</td>
+  </tr>
+  </tbody>
+  {/message}
+</table>
+{pagelist}
+<div id="login" class="ui form segment">
+<form action="index.php/c_user/user_login">
+<div id='error' class="ui red tiny header" ></div>
+ 	<div class="field">
+    <label>用户名</label>
+    	<div class="ui left labeled icon input">
+      		<input type="text" name="user_name">
+      		<i class="user icon"></i>
+      			<div class="ui corner label">
+      			<i class="icon asterisk"></i>
+      			</div>
+    	</div>
+  	</div>
+  	<div class="field">
+    	<label>密码</label>
+    		<div class="ui left labeled icon input">
+      		<input type="password" name="user_pwd">
+      		<i class="lock icon"></i>
+      			<div class="ui corner label">
+        		<i class="icon asterisk"></i>
+      			</div>
+    		</div>
+  	</div>
+	<input name="submit" type="submit" value="登陆" class="ui small blue submit button" />
+</form>
+</div>
+</body>
+</html>

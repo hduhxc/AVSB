@@ -1,0 +1,90 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>发布新消息</title>
+<link href="../../semantic/packaged/css/semantic.min.css" rel="stylesheet" type="text/css">
+<script src="../../script/jquery-2.0.3.min.js"></script>
+<script src="../../semantic/packaged/javascript/semantic.min.js"></script>
+<script src="../../script/validation_rule.js"></script>
+<style>
+#main {
+	margin-left: auto;
+	margin-right: auto;
+
+}
+</style>
+<script>
+$(document).ready(function(){
+	$('.ui.form').form(rule_message,
+		{ 
+			inline : true, 
+			on : 'blur' ,
+			onSuccess : function() {
+				var formData = $('form').serialize();
+				$.post('/index.php/c_message/message_publish',formData,processData);
+				function processData(data) {
+					$('#error').html('<div class="header">'+data+'</div>');
+					$('#error').show();
+					if (data == '成功发布新公告!') {
+						$('#submit').hide();
+						setTimeout(function(){
+							window.location.reload();
+						},2000);
+					}
+				}
+			}
+		});
+	$('#main').css('width',$(document).width() * 0.6);
+	$('#error').hide();
+});
+</script>
+</head>
+<body>
+<div class="ui menu">
+	<a class="item" href="/index.php">
+    	<i class="home icon"></i>首页
+    </a>
+	<a class ="active item">
+		<i class = "edit icon"></i> 发布新信息
+	</a>
+</div>
+<div id="main">
+<div id='error' class="ui small info message" ></div>
+<div class="ui attached message">
+	<div class="header"> 发布新信息 </div>
+</div>
+<div class="ui attached form segment">
+<form action="index.php/c_message/message_insert">
+	<div class="field">
+		<label>活动标题</label>
+		<input type="text" name="message_title" placeholder="请输入活动标题"/>
+	</div>
+	<div class="field">
+		<label>活动类型</label>
+		<input type="text" name="message_kind" placeholder="请输入活动类型，如讲座、招聘等"/>
+	</div>
+	<div class="field">
+		<label>活动组织人</label>
+		<input type="text" name="message_issuer" placeholder="请输入活动组织人"/>
+	</div>
+	<div class="field">
+		<label>联系方式</label>
+		<input type="text" name="message_contact" placeholder="请输入QQ号、手机号、Email等联系方式"/>
+	</div>
+	<div class="field">
+		<label>活动时间</label>
+		<input type="text" name="message_time" placeholder="请输入活动时间，如1990年1月1月7时0分"/>
+	</div>
+	<div class="field">
+		<label>活动地点</label>
+		<input type="text" name="message_location" placeholder="请输入活动地点"/>
+	</div>
+	<div class="field">
+  		<label>活动详情</label>
+    	<textarea name="message_content" placeholder="可选,如对活动内容有补充请在此输入"></textarea>
+	</div>
+	<div id="submit" class="ui blue submit button">提交</div>
+</form>
+</div>
+</body>
+</html>
