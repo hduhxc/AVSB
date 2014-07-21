@@ -1,7 +1,9 @@
-A very simple BBS!
+#AVSB
 
-Only provide fundamental functions :
+一个非常简单的BBS系统，仅提供了以下的基本功能：
 
-Login/Registry user
++ 用户注册/登陆
 
-Publish/View message
++ 发布/查看留言
+
+采用 `PHP` + `Senmantic UI` 开发
